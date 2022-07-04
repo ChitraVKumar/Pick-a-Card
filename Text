@@ -1,0 +1,118 @@
+QUESTION 1: Alice has some cards with numbers written on them.
+She arranges the cards in decreasing order, and lays them out face down in a sequence on a table.
+She challenges Bob to pick out the card containing a given number by turning over as few cards as possible.
+Write a function to help Bob locate the card.
+
+************************************************************************************************************************
+
+Solution:
+1. State the problem clearly. Identify the input & output formats.
+
+Problem:
+We need to write a program to find the position of a given number in a list of numbers arranged in decreasing order.
+We also need to minimize the number of times we access elements from the list.
+
+Input
+cards: A list of numbers sorted in decreasing order. E.g. [13, 11, 10, 7, 4, 3, 1, 0]
+query: A number, whose position in the array is to be determined. E.g. 7
+
+Output:
+position: The position of query in the list cards. E.g. 3 in the above case (counting from 0)
+
+Based on the above, we can now create the signature of our function:
+
+def locate_cards(cards, query):
+    pass
+
+Tips:
+1. Name your function appropriately and think carefully about the signature
+2. Discuss the problem with the interviewer if you are unsure how to frame it in abstract terms
+3. Use descriptive variable names, otherwise you may forget what a variable represents
+
+************************************************************************************************************************
+
+2. Come up with some example inputs & outputs. Try to cover all edge cases.
+
+cards = [13, 11, 10, 7, 4, 3, 1, 0]
+query = 7
+output = 3
+
+result = locate_cards(cards, query)
+print(result)
+
+result == output
+
+We'll represent our test cases as dictionaries to make it easier to test them once we write implement our function.
+
+test = {
+    'input': {
+        'cards': [13, 11, 10, 7, 4, 3, 1, 0],
+        'query': 7
+    },
+    'output': 3
+}
+
+locate_card(**test['input']) == test['output']
+
+Possible test cases:
+1. The number query occurs somewhere in the middle of the list cards.
+2. query is the first element in cards.
+3. query is the last element in cards.
+4. The list cards contains just one element, which is query.
+5. The list cards does not contain number query.
+6. The list cards is empty.
+7. The list cards contains repeating numbers.
+8. The number query occurs at more than one position in cards.
+
+
+The problem statement does not specify what to do if the list cards does not contain the number query.
+
+1. Read the problem statement again, carefully.
+2. Look through the examples provided with the problem.
+3. Ask the interviewer/platform for a clarification.
+4. Make a reasonable assumption, state it and move forward.
+5. We will assume that our function will return -1 in case cards does not contain query.
+
+**************************************************************************************************************
+
+3. Come up with a correct solution for the problem.
+State it in plain English.
+
+Algorithm:
+1. Create a variable position with the value 0.
+2. Check whether the number at index position in card equals query.
+3. If it does, position is the answer and can be returned from the function
+4. If not, increment the value of position by 1, and repeat steps 2 to 5 till we reach the last position.
+5. If the number was not found, return -1.
+
+
+*******************************************************************************************************************
+
+4. Implement the solution and test it using example inputs.
+Fix bugs, if any.
+
+***************************************************************************************************************************
+
+5. Analyze the algorithm's complexity and identify inefficiencies, if any.
+
+The field of study concerned with finding the amount of time, space or other resources required to complete the
+execution of computer programs is called the analysis of algorithms.
+And the process of figuring out the best algorithm to solve a given problem is called algorithm design and optimization.
+
+************************************************************************************************************************
+
+6. Apply the right technique to overcome the inefficiencies. Repeat steps 3 to 6.
+
+7. Come up with the correct solution for the problem. Repeat steps 3 to 6
+
+Binary search can be applied to the problem
+- Find the middle element
+- If it matches the queries number, return the middle position as the answer.
+- If it is less than the queried number, then search the first half of the list.
+- If it is greater than the quried number, then search the second half of the list.
+- If no more elements remain return -1.
+
+************************************************************************************************************************
+
+8. Implement the solution and test it using example inputs. Fix bugs, if any.
+
